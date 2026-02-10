@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UX Technology Radar — Track What Matters in Design &amp; UX</title>
+  <meta name="description" content="An interactive technology radar for UI/UX designers, HCI experts, and UX professionals to track tools, techniques, frameworks, and emerging technology." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-content">
+      <div class="header-title">
+        <h1>UX Technology Radar</h1>
+        <p class="subtitle">Track tools, techniques, and trends shaping design &amp; user experience</p>
+      </div>
+      <div class="header-actions">
+        <button id="btn-add-item" class="btn btn-primary" title="Add new technology">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Add Item
+        </button>
+        <button id="btn-reset" class="btn btn-ghost" title="Reset to default data">Reset</button>
+        <button id="btn-export" class="btn btn-ghost" title="Export radar data">Export</button>
+        <button id="btn-import" class="btn btn-ghost" title="Import radar data">Import</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <section class="radar-section">
+      <div id="radar-container" class="radar-container"></div>
+      <div id="radar-tooltip" class="radar-tooltip"></div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>Technologies</h2>
+        <span id="item-count" class="badge">0</span>
+      </div>
+
+      <div class="sidebar-filters">
+        <input type="search" id="search-input" class="search-input" placeholder="Search technologies..." />
+        <div class="filter-row">
+          <select id="filter-quadrant" class="filter-select">
+            <option value="">All Quadrants</option>
+          </select>
+          <select id="filter-ring" class="filter-select">
+            <option value="">All Rings</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="item-list" class="item-list"></div>
+    </aside>
+  </main>
+
+  <dialog id="item-modal" class="item-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">Add Technology</h3>
+        <button id="modal-close" class="btn-icon" title="Close">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <form id="item-form" class="item-form">
+        <input type="hidden" id="form-id" name="id" />
+        <div class="form-group">
+          <label for="form-name">Technology Name</label>
+          <input type="text" id="form-name" name="name" required placeholder="e.g., Figma, Design Tokens, React" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="form-quadrant">Quadrant</label>
+            <select id="form-quadrant" name="quadrant" required></select>
+          </div>
+          <div class="form-group">
+            <label for="form-ring">Ring</label>
+            <select id="form-ring" name="ring" required></select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="form-description">Description</label>
+          <textarea id="form-description" name="description" rows="3" placeholder="Brief description of this technology and why it matters for UX..."></textarea>
+        </div>
+        <div class="form-group form-checkbox">
+          <label>
+            <input type="checkbox" id="form-isNew" name="isNew" />
+            <span>New or recently changed</span>
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="btn-delete-item" class="btn btn-danger" style="display:none;">Delete</button>
+          <div class="form-actions-right">
+            <button type="button" id="btn-cancel" class="btn btn-ghost">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="import-modal" class="item-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Import Radar Data</h3>
+        <button id="import-modal-close" class="btn-icon" title="Close">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="import-body">
+        <p>Paste exported radar data below to restore a saved radar configuration.</p>
+        <textarea id="import-textarea" class="import-textarea" rows="8" placeholder="Paste exported data here..."></textarea>
+        <div class="form-actions">
+          <div class="form-actions-right">
+            <button type="button" id="btn-import-cancel" class="btn btn-ghost">Cancel</button>
+            <button type="button" id="btn-import-confirm" class="btn btn-primary">Import</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <footer class="app-footer">
+    <p>Inspired by <a href="https://www.thoughtworks.com/radar" target="_blank" rel="noopener">ThoughtWorks Technology Radar</a>. Built for the UX community.</p>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
