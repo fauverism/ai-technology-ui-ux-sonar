@@ -1,6 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* ──────────────────────────────────────────────────────────────
-   UX Technology Radar — Styles
-   ────────────────────────────────────────────────────────────── */
+  UX Technology Radar — Styles
+  ────────────────────────────────────────────────────────────── */
 
 /* ── Reset & base ──────────────────────────────────────────── */
 
@@ -196,7 +200,7 @@ body {
 
 /* Ring labels */
 .ring-label {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   fill: #9ca3af;
   text-transform: uppercase;
@@ -206,7 +210,7 @@ body {
 
 /* Quadrant labels */
 .quadrant-label {
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.01em;
   pointer-events: none;
@@ -214,11 +218,7 @@ body {
 
 /* Blip interactions */
 .blip {
-  transition: transform 100ms ease;
-}
-
-.blip:hover {
-  transform: scale(1.4);
+  transition: none;
 }
 
 .blip--selected circle,
@@ -481,11 +481,17 @@ body {
 /* ── Modal / Dialog ────────────────────────────────────────── */
 
 .item-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border: none;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   max-width: 520px;
   width: calc(100% - 32px);
+  max-height: calc(100vh - 48px);
+  overflow: auto;
   padding: 0;
   background: var(--color-surface);
   color: var(--color-text);
@@ -494,6 +500,36 @@ body {
 .item-modal::backdrop {
   background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(4px);
+}
+
+/* Entrance animation */
+.item-modal[open] {
+  animation: modal-entrance 180ms ease;
+}
+
+@keyframes modal-entrance {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes backdrop-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.item-modal::backdrop {
+  animation: backdrop-fade 180ms ease;
+}
+
+.item-modal :focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 .modal-content {

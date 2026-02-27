@@ -249,8 +249,20 @@ export class TechRadar {
       .attr('class', (d) => `blip ${d.id === this.selectedId ? 'blip--selected' : ''}`)
       .attr('transform', (d) => `translate(${d.px},${d.py})`)
       .style('cursor', 'pointer')
-      .on('mouseenter', (event, d) => this._showTooltip(event, d))
-      .on('mouseleave', () => this._hideTooltip())
+      .on('mouseenter', (event, d) => {
+        d3.select(event.currentTarget)
+          .transition()
+          .duration(100)
+          .attr('transform', (d) => `translate(${d.px},${d.py}) scale(1.4)`);
+        this._showTooltip(event, d);
+      })
+      .on('mouseleave', (event, d) => {
+        d3.select(event.currentTarget)
+          .transition()
+          .duration(100)
+          .attr('transform', (d) => `translate(${d.px},${d.py})`);
+        this._hideTooltip();
+      })
       .on('click', (event, d) => {
         event.stopPropagation();
         if (this.onItemClick) this.onItemClick(d);

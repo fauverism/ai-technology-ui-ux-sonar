@@ -41,10 +41,6 @@ export function getDefaultData() {
       id: generateId(), name: 'Miro', quadrant: 0, ring: 0, isNew: false,
       description: 'Visual collaboration platform ideal for remote workshops, journey mapping, affinity diagramming, and design sprints with distributed teams.',
     },
-    {
-      id: generateId(), name: 'Notion', quadrant: 0, ring: 0, isNew: false,
-      description: 'All-in-one workspace for design documentation, research repositories, team wikis, and project management — bridges the gap between design and product teams.',
-    },
 
     // Trial
     {

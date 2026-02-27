@@ -44,6 +44,7 @@ export class UI {
     this.deleteBtn.style.display = 'none';
     this.modal.showModal();
     document.getElementById('form-name').focus();
+    this._attachModalA11y();
   }
 
   openEditModal(item) {
@@ -57,6 +58,8 @@ export class UI {
     document.getElementById('form-isNew').checked = item.isNew || false;
     this.deleteBtn.style.display = 'inline-flex';
     this.modal.showModal();
+    document.getElementById('form-name').focus();
+    this._attachModalA11y();
   }
 
   scrollToItem(id) {
@@ -155,6 +158,57 @@ export class UI {
         if (importModal.open) importModal.close();
       }
     });
+  }
+
+  _attachModalA11y() {
+    this._previouslyFocused = document.activeElement;
+    const modal = this.modal;
+
+    this._modalKeyHandler = (e) => {
+      if (e.key === 'Escape') {
+        if (modal.open) modal.close();
+      }
+
+      if (e.key === 'Tab') {
+        const focusable = modal.querySelectorAll(
+          'a[href], area[href], input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) {
+          e.preventDefault();
+          return;
+        }
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === first || document.activeElement === modal) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
+    };
+
+    modal.addEventListener('keydown', this._modalKeyHandler);
+
+    this._modalCloseHandler = () => {
+      modal.removeEventListener('keydown', this._modalKeyHandler);
+      modal.removeEventListener('close', this._modalCloseHandler);
+      if (this._previouslyFocused && typeof this._previouslyFocused.focus === 'function') {
+        this._previouslyFocused.focus();
+      }
+      const main = document.querySelector('main');
+      if (main) main.removeAttribute('aria-hidden');
+    };
+
+    modal.addEventListener('close', this._modalCloseHandler);
+    const main = document.querySelector('main');
+    if (main) main.setAttribute('aria-hidden', 'true');
   }
 
   // ── Private: form handling ──────────────────────────────────
