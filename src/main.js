@@ -3,7 +3,7 @@
  * Wires together the radar visualization, UI controls, and persistence layer.
  */
 
-import { getDefaultData } from './data.js';
+import { getDefaultData, getStarterData } from './data.js';
 import { Storage } from './storage.js';
 import { TechRadar } from './radar.js';
 import { UI } from './ui.js';
@@ -46,6 +46,32 @@ const ui = new UI({
 });
 
 ui.setItems(items);
+
+// ── New radar button ───────────────────────────────────────────
+
+const banner = document.getElementById('alpha-banner');
+const bannerClose = document.getElementById('alpha-banner-close');
+let bannerDismissed = false;
+
+if (banner && bannerClose) {
+  bannerClose.addEventListener('click', () => {
+    bannerDismissed = true;
+    banner.style.display = 'none';
+  });
+}
+
+document.getElementById('btn-new-radar').addEventListener('click', () => {
+  const message =
+    'Create a new radar? Your current data will be replaced.\n\n' +
+    'Export your current radar first if you want to keep it.';
+  if (confirm(message)) {
+    items = getStarterData();
+    persist();
+    if (banner && !bannerDismissed) {
+      banner.style.display = 'flex';
+    }
+  }
+});
 
 // ── Reset button ───────────────────────────────────────────────
 

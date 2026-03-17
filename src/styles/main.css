@@ -66,6 +66,39 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
+.alpha-banner {
+  position: sticky;
+  top: 72px; /* header height + some spacing */
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  background: #fef3c7; /* amber-100 */
+  color: #92400e; /* amber-700 */
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.alpha-banner p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.alpha-banner .btn-icon {
+  color: #92400e;
+}
+
+@media (max-width: 768px) {
+  .alpha-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 14px;
+  }
+}
+
 .header-content {
   max-width: 1600px;
   margin: 0 auto;

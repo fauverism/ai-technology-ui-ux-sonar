@@ -28,6 +28,44 @@ export function generateId() {
 /**
  * Default radar items curated for UI/UX designers, HCI experts, and UX professionals.
  */
+export function getStarterData() {
+  return [
+    // Minimal starter dataset: one sample item per quadrant.
+    {
+      id: generateId(),
+      name: 'Sample: Figma',
+      quadrant: 0,
+      ring: 0,
+      isNew: true,
+      description: 'Sample item — replace me! This is a starter item for the Design Tools quadrant.',
+    },
+    {
+      id: generateId(),
+      name: 'Sample: Design Systems',
+      quadrant: 1,
+      ring: 1,
+      isNew: true,
+      description: 'Sample item — replace me! This is a starter item for the Techniques & Methods quadrant.',
+    },
+    {
+      id: generateId(),
+      name: 'Sample: React',
+      quadrant: 2,
+      ring: 2,
+      isNew: true,
+      description: 'Sample item — replace me! This is a starter item for the Frameworks & UI Libraries quadrant.',
+    },
+    {
+      id: generateId(),
+      name: 'Sample: AI Research Assistants',
+      quadrant: 3,
+      ring: 3,
+      isNew: true,
+      description: 'Sample item — replace me! This is a starter item for the AI & Emerging Technology quadrant.',
+    },
+  ];
+}
+
 export function getDefaultData() {
   return [
     // ─── Design Tools & Platforms ────────────────────────────────
