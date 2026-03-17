@@ -21,12 +21,22 @@
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           Add Item
         </button>
+        <button id="btn-new-radar" class="btn btn-ghost" title="Create a new radar">Create Your Own</button>
         <button id="btn-reset" class="btn btn-ghost" title="Reset to default data">Reset</button>
         <button id="btn-export" class="btn btn-ghost" title="Export radar data">Export</button>
         <button id="btn-import" class="btn btn-ghost" title="Import radar data">Import</button>
       </div>
     </div>
   </header>
+
+  <div id="alpha-banner" class="alpha-banner" role="status" aria-live="polite">
+    <p>
+      <strong>Alpha preview:</strong> Your radar is stored locally in this browser. Export regularly to avoid losing changes. Use the Export button above.
+    </p>
+    <button id="alpha-banner-close" class="btn-icon" aria-label="Dismiss banner">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
 
   <main class="app-main">
     <section class="radar-section">
